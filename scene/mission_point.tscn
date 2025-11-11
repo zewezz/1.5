@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c51k1m707qj1b"]
+
+[ext_resource type="Texture2D" uid="uid://djs46ncijvxwx" path="res://asset/pixelCardAssest_V01.png" id="1_bf3fl"]
+[ext_resource type="Script" uid="uid://bi0bl7s3s6udy" path="res://mission_point.gd" id="1_ixdxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixdxk"]
+size = Vector2(108, 131)
+
+[node name="missionPoint" type="Node2D"]
+script = ExtResource("1_ixdxk")
+
+[node name="MissionPoint_image" type="Sprite2D" parent="."]
+position = Vector2(1, 0.25)
+scale = Vector2(1.1666666, 1.0751634)
+texture = ExtResource("1_bf3fl")
+flip_h = true
+hframes = 6
+vframes = 4
+frame = 18
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 2
+visibility_layer = 2
+shape = SubResource("RectangleShape2D_ixdxk")

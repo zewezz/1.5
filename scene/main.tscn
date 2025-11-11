@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cow7pbn237uhk"]
+
+[ext_resource type="Script" uid="uid://dl3hlph1bh3si" path="res://card_manager.gd" id="1_wp4xf"]
+[ext_resource type="PackedScene" uid="uid://c51k1m707qj1b" path="res://scene/mission_point.tscn" id="2_brvut"]
+[ext_resource type="Script" uid="uid://cixwiq367t5l6" path="res://player_hand.gd" id="3_0ha60"]
+
+[node name="Main" type="Node2D"]
+
+[node name="cardManager" type="Node2D" parent="."]
+script = ExtResource("1_wp4xf")
+
+[node name="missionPoint" parent="." instance=ExtResource("2_brvut")]
+position = Vector2(227, 174)
+
+[node name="missionPoint2" parent="." instance=ExtResource("2_brvut")]
+position = Vector2(884, 176)
+
+[node name="PlayerHand" type="Node2D" parent="."]
+script = ExtResource("3_0ha60")
