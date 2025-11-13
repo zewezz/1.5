@@ -8,6 +8,7 @@ var inhand_pos
 func _ready() -> void:
 	# all cards must be the child of the cardmanager!!!
 	get_parent().connect_card_signal(self)
+	#$"TextureProgressBar".visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,3 +22,6 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	emit_signal("hovered_off", self)
+
+
+	

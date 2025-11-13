@@ -10,6 +10,7 @@ size = Vector2(108, 131)
 script = ExtResource("1_ixdxk")
 
 [node name="MissionPoint_image" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(1, 0.25)
 scale = Vector2(1.1666666, 1.0751634)
 texture = ExtResource("1_bf3fl")

@@ -1,5 +1,6 @@
 extends Node2D
 
+
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_MISSION = 2
 
@@ -44,6 +45,8 @@ func finish_drag():
 		card_draging.position = mission_point_found.position
 		card_draging.get_node("Area2D/CollisionShape2D").disabled = true
 		mission_point_found.card_inpoint =true
+		play_cooldown(card_draging)
+		
 	else:
 		player_hand_reference.add_card_to_hand(card_draging)
 	card_draging = null
@@ -110,3 +113,27 @@ func get_higher_index(cards):
 			highest_z_index = current_card.z_index
 	return highest_z_card
 	
+# MODIFIED: Takes the specific card instance as an argument.
+func play_cooldown(card: Node2D):
+	# Assuming TextureProgressBar is a direct child of the card
+	var cooldown_bar = card.get_node("TextureProgressBar")
+	# Assuming AnimationPlayer is a direct child of the card
+	var anim_player = card.get_node("AnimationPlayer")
+	
+	if is_instance_valid(cooldown_bar):
+		cooldown_bar.visible = true
+		
+	if is_instance_valid(anim_player):
+		anim_player.play("cooldown")
+		
+		# Connect the signal to the dedicated cleanup function.
+		# .bind(cooldown_bar) ensures we pass the specific TextureProgressBar instance.
+		# CONNECT_ONE_SHOT ensures the connection is automatically removed after the first call.
+		anim_player.animation_finished.connect(_on_cooldown_finished_for_bar.bind(cooldown_bar), CONNECT_ONE_SHOT)
+
+# NEW FUNCTION: Handles the cleanup for a specific bar instance.
+func _on_cooldown_finished_for_bar(bar: TextureProgressBar, anim_name: StringName):
+	# Check if the finished animation was the cooldown
+	if anim_name == "cooldown":
+		if is_instance_valid(bar):
+			bar.visible = false
