@@ -1,5 +1,6 @@
 extends Node2D
 
+# Removed: signal cooldown_finished - The function play_cooldown is now awaited directly.
 
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_MISSION = 2
@@ -37,19 +38,27 @@ func start_drag(card):
 
 func finish_drag():
 	
-	card_draging.scale = Vector2(1.05,1.05)
+	# FIX: Save the reference and immediately stop dragging!
+	var card_to_process = card_draging 
+	card_draging = null # <--- Card stops following the cursor NOW
+	
+	if not is_instance_valid(card_to_process):
+		return # Safety check
+	
+	card_to_process.scale = Vector2(1.05,1.05)
 	var mission_point_found = raycast_checkmission()
-	#var collision_shape_node = mission_point_found.get_node("Area2D/CollisionShape2D")
+	
 	if mission_point_found and not mission_point_found.card_inpoint:
-		player_hand_reference.remove_card_from_hand(card_draging)
-		card_draging.position = mission_point_found.position
-		card_draging.get_node("Area2D/CollisionShape2D").disabled = true
+		player_hand_reference.remove_card_from_hand(card_to_process)
+		card_to_process.position = mission_point_found.position
+		card_to_process.get_node("Area2D/CollisionShape2D").disabled = true
 		mission_point_found.card_inpoint =true
-		play_cooldown(card_draging)
-		
+		# The function itself returns a signal object because it contains an 'await'.
+		await play_cooldown(card_to_process) 
+		player_hand_reference.return_card_to_hand(card_to_process)
 	else:
-		player_hand_reference.add_card_to_hand(card_draging)
-	card_draging = null
+		player_hand_reference.add_card_to_hand(card_to_process)
+	
 	
 			
 func connect_card_signal(card):
@@ -114,26 +123,27 @@ func get_higher_index(cards):
 	return highest_z_card
 	
 # MODIFIED: Takes the specific card instance as an argument.
+# This function is now directly awaitable.
 func play_cooldown(card: Node2D):
-	# Assuming TextureProgressBar is a direct child of the card
+	# Find the necessary nodes relative to the card instance
 	var cooldown_bar = card.get_node("TextureProgressBar")
-	# Assuming AnimationPlayer is a direct child of the card
 	var anim_player = card.get_node("AnimationPlayer")
-	
-	if is_instance_valid(cooldown_bar):
-		cooldown_bar.visible = true
-		
-	if is_instance_valid(anim_player):
-		anim_player.play("cooldown")
-		
-		# Connect the signal to the dedicated cleanup function.
-		# .bind(cooldown_bar) ensures we pass the specific TextureProgressBar instance.
-		# CONNECT_ONE_SHOT ensures the connection is automatically removed after the first call.
-		anim_player.animation_finished.connect(_on_cooldown_finished_for_bar.bind(cooldown_bar), CONNECT_ONE_SHOT)
-
-# NEW FUNCTION: Handles the cleanup for a specific bar instance.
-func _on_cooldown_finished_for_bar(bar: TextureProgressBar, anim_name: StringName):
-	# Check if the finished animation was the cooldown
-	if anim_name == "cooldown":
-		if is_instance_valid(bar):
-			bar.visible = false
+	if not is_instance_valid(anim_player) or not is_instance_valid(cooldown_bar):
+		# Print an error if nodes are missing and exit the function.
+		print("Missing 'AnimationPlayer' or 'TextureProgressBar' child nodes in the card instance.")
+		return
+	# 1. Turn on the bar
+	cooldown_bar.visible = true
+	# 2. Play the animation
+	anim_player.play("cooldown")
+	# 3. Use 'await' to pause the function until the 'animation_finished' signal is emitted.
+	var finished_anim_name = await anim_player.animation_finished
+	# 4. Check if the animation that finished was the one we were waiting for
+	if finished_anim_name == "cooldown":
+		# 5. Turn off the bar (This code runs ONLY after the animation is finished)
+		cooldown_bar.visible = false
+		# Removed: emit_signal("cooldown_finished")
+		print("Cooldown finished.")
+	else:
+		# Optional: Handle if another animation interrupted or finished unexpectedly
+		pass
