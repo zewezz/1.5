@@ -1,10 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cow7pbn237uhk"]
+[gd_scene load_steps=5 format=3 uid="uid://cow7pbn237uhk"]
 
+[ext_resource type="Script" uid="uid://bnldlq3qacmg0" path="res://scene/game_manager.gd" id="1_brvut"]
 [ext_resource type="Script" uid="uid://dl3hlph1bh3si" path="res://card_manager.gd" id="1_wp4xf"]
 [ext_resource type="PackedScene" uid="uid://c51k1m707qj1b" path="res://scene/mission_point.tscn" id="2_brvut"]
 [ext_resource type="Script" uid="uid://cixwiq367t5l6" path="res://player_hand.gd" id="3_0ha60"]
 
 [node name="Main" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_brvut")
+
+[node name="score_label" type="Label" parent="GameManager"]
+offset_left = 1332.0
+offset_top = 58.0
+offset_right = 1887.0
+offset_bottom = 137.0
+theme_override_font_sizes/font_size = 54
+text = "Satisfied Customer: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="cardManager" type="Node2D" parent="."]
 script = ExtResource("1_wp4xf")

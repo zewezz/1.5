@@ -1,6 +1,6 @@
 extends Node2D
 
-# Removed: signal cooldown_finished - The function play_cooldown is now awaited directly.
+@onready var game_manager: Node = %GameManager
 
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_MISSION = 2
@@ -13,6 +13,7 @@ var player_hand_reference
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	
 	player_hand_reference = $"../PlayerHand"
 	
 func _process(delta: float) -> void:
@@ -44,7 +45,6 @@ func finish_drag():
 	
 	if not is_instance_valid(card_to_process):
 		return # Safety check
-	
 	card_to_process.scale = Vector2(1.05,1.05)
 	var mission_point_found = raycast_checkmission()
 	
@@ -55,6 +55,7 @@ func finish_drag():
 		mission_point_found.card_inpoint =true
 		# The function itself returns a signal object because it contains an 'await'.
 		await play_cooldown(card_to_process) 
+		game_manager.add_point()
 		player_hand_reference.return_card_to_hand(card_to_process)
 	else:
 		player_hand_reference.add_card_to_hand(card_to_process)
