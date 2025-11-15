@@ -5,5 +5,6 @@ extends Node2D
 var card_inpoint = false
 
 func play_com():
+	
 	mis_complete.play()
 	

@@ -32,3 +32,5 @@ position = Vector2(884, 176)
 
 [node name="PlayerHand" type="Node2D" parent="."]
 script = ExtResource("3_0ha60")
+
+[connection signal="play_score" from="GameManager" to="missionPoint" method="play_com"]
