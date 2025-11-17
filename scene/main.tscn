@@ -43,6 +43,23 @@ animations = [{
 "loop": true,
 "name": &"4",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_tqoya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_k65ib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wscrc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mswub")
+}],
+"loop": true,
+"name": &"wait_dice",
+"speed": 8.0
 }]
 
 [node name="Main" type="Node2D"]
@@ -84,16 +101,20 @@ size = Vector2i(500, 500)
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="Dice/Window"]
+offset = Vector2(250, 250)
 
 [node name="ColorRect" type="ColorRect" parent="Dice/Window"]
-offset_left = -19.0
-offset_top = -18.0
-offset_right = 21.0
-offset_bottom = 22.0
+offset_left = -27.0
+offset_top = -6.0
+offset_right = 553.0
+offset_bottom = 539.0
 color = Color(1, 0.5529412, 1, 1)
 
 [node name="Dice_roll" type="AnimatedSprite2D" parent="Dice/Window"]
+position = Vector2(255.99994, 230.00002)
+scale = Vector2(14.890632, 12.5625)
 sprite_frames = SubResource("SpriteFrames_hybxs")
-animation = &"4"
+animation = &"wait_dice"
+frame_progress = 0.21756835
 
 [connection signal="play_score" from="GameManager" to="missionPoint" method="play_com"]
