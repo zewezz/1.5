@@ -19,6 +19,7 @@ func _on_window_close_request():
 	popup.hide()
 	
 func _input(event):
+	#the input key is "k"
 	if event.is_action_pressed("Roll") and not dice_roll.is_playing():
 		popup.show()
 		dice_roll.play("wait_dice")

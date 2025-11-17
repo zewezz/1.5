@@ -115,6 +115,6 @@ position = Vector2(255.99994, 230.00002)
 scale = Vector2(14.890632, 12.5625)
 sprite_frames = SubResource("SpriteFrames_hybxs")
 animation = &"wait_dice"
-frame_progress = 0.21756835
+frame_progress = 0.3523923
 
 [connection signal="play_score" from="GameManager" to="missionPoint" method="play_com"]
