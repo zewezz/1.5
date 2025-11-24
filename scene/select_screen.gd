@@ -15,3 +15,8 @@ func _process(delta) -> void:
 func _on_alert_open_screen() -> void:
 	self.visible = true
 	print("signal recieve")
+
+#func _on_return_area(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		#self.visible = false
+		#print("close sreen")

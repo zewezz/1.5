@@ -10,13 +10,7 @@ func _ready() -> void:
 func _process(delta):
 	pass
 
-func change_cursor_hand():
-	self.scale = Vector2(1.05,1.05)
+
+func _on_button_pressed() -> void:
+	emit_signal("open_screen")
 	
-func change_cursor_back():
-	self.scale = Vector2(1,1)
-	
-func open_select_screen(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		emit_signal("open_screen")
-		print("emit COMPLETE")

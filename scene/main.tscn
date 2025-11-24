@@ -127,3 +127,4 @@ visible = false
 position = Vector2(-603, 175)
 
 [connection signal="play_score" from="GameManager" to="missionPoint" method="play_com"]
+[connection signal="open_screen" from="Alert" to="Alert/select_screen" method="_on_alert_open_screen"]
