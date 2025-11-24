@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c51k1m707qj1b"]
 
 [ext_resource type="Texture2D" uid="uid://djs46ncijvxwx" path="res://asset/pixelCardAssest_V01.png" id="1_bf3fl"]
-[ext_resource type="Script" uid="uid://bi0bl7s3s6udy" path="res://mission_point.gd" id="1_ixdxk"]
+[ext_resource type="Script" uid="uid://bi0bl7s3s6udy" path="res://script/mission_point.gd" id="1_ixdxk"]
 [ext_resource type="AudioStream" uid="uid://0uop7py3rh22" path="res://asset/sound/coin.wav" id="3_ke5v7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixdxk"]

@@ -11,6 +11,8 @@ func add_point():
 	print(score)
 	score_label.text = "Satisfied Customer: " + str(score) 
 	emit_signal("play_score")
+
+
 	
 
 	
