@@ -48,11 +48,11 @@ func finish_drag():
 	card_to_process.scale = Vector2(1.05,1.05)
 	var mission_point_found = raycast_checkmission()
 	
-	if mission_point_found and not mission_point_found.card_inpoint:
+	if mission_point_found and mission_point_found.is_ready_to_snap():
 		player_hand_reference.remove_card_from_hand(card_to_process)
 		card_to_process.position = mission_point_found.position
 		card_to_process.get_node("Area2D/CollisionShape2D").disabled = true
-		mission_point_found.card_inpoint =true
+		mission_point_found.card_snap_here()
 		# The function itself returns a signal object because it contains an 'await'.
 		await play_cooldown(card_to_process) 
 		game_manager.add_point()

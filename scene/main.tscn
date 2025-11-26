@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://dl3hlph1bh3si" path="res://card_manager.gd" id="1_wp4xf"]
 [ext_resource type="PackedScene" uid="uid://c51k1m707qj1b" path="res://scene/mission_point.tscn" id="2_brvut"]
 [ext_resource type="Script" uid="uid://cixwiq367t5l6" path="res://script/player_hand.gd" id="3_0ha60"]
-[ext_resource type="Script" uid="uid://dkeo3bie5n4fb" path="res://scene/dice.gd" id="5_b5f6u"]
+[ext_resource type="Script" path="res://scene/dice.gd" id="5_b5f6u"]
 [ext_resource type="Texture2D" uid="uid://bk76nkw4w6bvb" path="res://asset/Dice/1.png" id="6_tqoya"]
 [ext_resource type="Texture2D" uid="uid://l8x0bnc4et0" path="res://asset/Dice/2.png" id="7_k65ib"]
 [ext_resource type="Texture2D" uid="uid://bhstydw0m7shj" path="res://asset/Dice/3.png" id="8_wscrc"]
 [ext_resource type="Texture2D" uid="uid://b5pxvr4umi0ox" path="res://asset/Dice/4.png" id="9_mswub"]
 [ext_resource type="PackedScene" uid="uid://d0p8a8djin46q" path="res://scene/alert.tscn" id="10_tqoya"]
-[ext_resource type="PackedScene" uid="uid://t4i7crgi2i33" path="res://scene/select_screen.tscn" id="11_k65ib"]
+[ext_resource type="PackedScene" uid="uid://lg0y1m707bpa" path="res://scene/select_screen.tscn" id="11_k65ib"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hybxs"]
 animations = [{
@@ -125,6 +125,16 @@ position = Vector2(1310, 452)
 [node name="select_screen" parent="Alert" instance=ExtResource("11_k65ib")]
 visible = false
 position = Vector2(-603, 175)
+requirement_count = 2
+
+[node name="Alert2" parent="." instance=ExtResource("10_tqoya")]
+position = Vector2(566, 468)
+
+[node name="select_screen" parent="Alert2" instance=ExtResource("11_k65ib")]
+visible = false
+position = Vector2(-603, 175)
+requirement_count = 1
 
 [connection signal="play_score" from="GameManager" to="missionPoint" method="play_com"]
 [connection signal="open_screen" from="Alert" to="Alert/select_screen" method="_on_alert_open_screen"]
+[connection signal="open_screen" from="Alert2" to="Alert2/select_screen" method="_on_alert_open_screen"]
