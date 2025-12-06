@@ -18,11 +18,13 @@ func _ready() -> void:
 		new_card.name = "Card"
 		add_card_to_hand(new_card)
 		
+		
 func add_card_to_hand(card):
 	#print("add_card_to_hand")
 	if card not in player_hand:		
 		player_hand.insert(0, card)
 		update_hand_position()
+		
 	else: 
 		animate_card_to_pos(card,card.inhand_pos)
 		

@@ -1,7 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0p8a8djin46q"]
+[gd_scene load_steps=7 format=3 uid="uid://d0p8a8djin46q"]
 
 [ext_resource type="Script" uid="uid://dt8s0f4etv1gt" path="res://alert.gd" id="1_ses4w"]
 [ext_resource type="Texture2D" uid="uid://b66yer8efn4ug" path="res://asset/UI/01_Flat_Theme/Sprites/UI_Flat_ButtonPlay01a.png" id="2_ses4w"]
+[ext_resource type="Texture2D" uid="uid://bnda8omo57kd4" path="res://asset/white2x2.jpg" id="3_t22ld"]
+
+[sub_resource type="Animation" id="Animation_ik8m0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:mouse_filter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureProgressBar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_657vb"]
+resource_name = "cooldown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:mouse_filter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureProgressBar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_22q33"]
+_data = {
+&"RESET": SubResource("Animation_ik8m0"),
+&"cooldown": SubResource("Animation_657vb")
+}
 
 [node name="Alert" type="Node2D"]
 script = ExtResource("1_ses4w")
@@ -9,10 +71,37 @@ script = ExtResource("1_ses4w")
 [node name="Button" type="Button" parent="."]
 offset_left = -123.99999
 offset_top = -121.99999
-offset_right = -98.99999
+offset_right = -98.79999
 offset_bottom = -97.99999
 scale = Vector2(10, 10)
 icon = ExtResource("2_ses4w")
 icon_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Button"]
+self_modulate = Color(0.8014167, 0.66938543, 0, 0.88235295)
+clip_children = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.400001
+offset_top = -12.100001
+offset_right = 12.699997
+offset_bottom = 11.899998
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+rounded = true
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("3_t22ld")
+tint_progress = Color(0.96173567, 0.9654973, 0.9690226, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Button"]
+libraries = {
+&"": SubResource("AnimationLibrary_22q33")
+}
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

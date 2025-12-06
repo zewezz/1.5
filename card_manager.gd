@@ -1,6 +1,10 @@
 extends Node2D
 
 @onready var game_manager: Node = %GameManager
+@onready var alert_2: Node2D = $"../Alert2"
+@onready var alert_3: Node2D = $"../Alert3"
+
+signal back_to_hand_action
 
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_MISSION = 2
@@ -11,6 +15,9 @@ var is_hoverin_on_card
 var center_offset
 var player_hand_reference
 # Called when the node enters the scene tree for the first time.
+
+signal back_to_hand
+
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	
@@ -35,7 +42,7 @@ func _input(event):
 			
 func start_drag(card):
 	card_draging = card
-	card.scale = Vector2(1.,1)
+	card.scale = Vector2(1,1)
 
 func finish_drag():
 	
@@ -50,13 +57,16 @@ func finish_drag():
 	
 	if mission_point_found and mission_point_found.is_ready_to_snap():
 		player_hand_reference.remove_card_from_hand(card_to_process)
-		card_to_process.position = mission_point_found.position
+		card_to_process.position = mission_point_found.global_position
+		print(card_to_process.position)
 		card_to_process.get_node("Area2D/CollisionShape2D").disabled = true
 		mission_point_found.card_snap_here()
+		var msg = await back_to_hand_action
+		check_card_on_sescreen(msg, card_to_process)
+		
 		# The function itself returns a signal object because it contains an 'await'.
-		await play_cooldown(card_to_process) 
-		game_manager.add_point()
-		player_hand_reference.return_card_to_hand(card_to_process)
+		#game_manager.add_point()
+		
 	else:
 		player_hand_reference.add_card_to_hand(card_to_process)
 	
@@ -83,10 +93,10 @@ func on_hovered_off_card(card):
 func highlight_card(card, hovered):
 	if hovered:
 		card.scale = Vector2(1.05,1.05)
-		card.z_index = 2
+		card.z_index = 6
 	else:
 		card.scale = Vector2(1,1)
-		card.z_index = 1
+		card.z_index = 5
 		
 func raycast_checkmission():
 	var space_state = get_world_2d().direct_space_state
@@ -148,3 +158,27 @@ func play_cooldown(card: Node2D):
 	else:
 		# Optional: Handle if another animation interrupted or finished unexpectedly
 		pass
+
+func _on_alert_2_back_to_hand(msg: String) -> void:
+	emit_signal("back_to_hand_action", msg)
+	#print("BTH" + msg)
+	
+	pass # Replace with function body.
+
+
+func _on_alert_3_back_to_hand(msg: String) -> void:
+	emit_signal("back_to_hand_action", msg)
+	#print("BTH" + msg)
+	pass # Replace with function body.
+
+func check_card_on_sescreen(action: String, card)-> void:
+	if (action == "sendGhost"):
+		emit_signal("back_to_hand_action")
+		player_hand_reference.add_card_to_hand(card)
+		await play_cooldown(card) 
+		card.get_node("Area2D/CollisionShape2D").disabled = false
+	elif (action == "undo"):
+		player_hand_reference.add_card_to_hand(card)
+		card.get_node("Area2D/CollisionShape2D").disabled = false
+
+	
