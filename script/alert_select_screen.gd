@@ -1,6 +1,6 @@
-class_name Alert
-extends Node2D
-signal open_screen
+class_name AlertSelectScreen
+extends Alert
+@export var select_screen: SelectScreen
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,10 +8,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	pass
-
-
-func _on_button_pressed() -> void:
-	emit_signal("open_screen")
-	

@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://l8x0bnc4et0" path="res://asset/Dice/2.png" id="7_k65ib"]
 [ext_resource type="Texture2D" uid="uid://bhstydw0m7shj" path="res://asset/Dice/3.png" id="8_wscrc"]
 [ext_resource type="Texture2D" uid="uid://b5pxvr4umi0ox" path="res://asset/Dice/4.png" id="9_mswub"]
-[ext_resource type="PackedScene" uid="uid://d0p8a8djin46q" path="res://scene/alert.tscn" id="10_tqoya"]
-[ext_resource type="PackedScene" uid="uid://lg0y1m707bpa" path="res://scene/select_screen.tscn" id="11_k65ib"]
+[ext_resource type="Script" uid="uid://dwro6dgvn3iwl" path="res://script/mission_loader.gd" id="12_wscrc"]
+[ext_resource type="Script" uid="uid://dtd2ggo3dorfq" path="res://script/mission_spawner.gd" id="13_mswub"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hybxs"]
 animations = [{
@@ -119,22 +119,24 @@ sprite_frames = SubResource("SpriteFrames_hybxs")
 animation = &"wait_dice"
 frame_progress = 0.3523923
 
-[node name="Alert" parent="." instance=ExtResource("10_tqoya")]
-position = Vector2(1310, 452)
+[node name="mission_loader" type="Node" parent="."]
+script = ExtResource("12_wscrc")
+mission_csv_path = "uid://dnly34blygtxa"
 
-[node name="select_screen" parent="Alert" instance=ExtResource("11_k65ib")]
-visible = false
-position = Vector2(-603, 175)
-requirement_count = 2
+[node name="mission_spawner" type="Node" parent="." node_paths=PackedStringArray("mission_loader", "spawn_timer")]
+script = ExtResource("13_mswub")
+mission_loader = NodePath("../mission_loader")
+spawn_timer = NodePath("Timer")
+min_rect_spawn_vector2 = Vector2(120, 100)
+max_rect_spawn_vector2 = Vector2(1750, 775)
 
-[node name="Alert2" parent="." instance=ExtResource("10_tqoya")]
-position = Vector2(566, 468)
+[node name="Timer" type="Timer" parent="mission_spawner"]
+wait_time = 5.0
 
-[node name="select_screen" parent="Alert2" instance=ExtResource("11_k65ib")]
-visible = false
-position = Vector2(-603, 175)
-requirement_count = 1
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1757, 777)
+scale = Vector2(-290.64783, 167.42886)
 
 [connection signal="play_score" from="GameManager" to="missionPoint" method="play_com"]
-[connection signal="open_screen" from="Alert" to="Alert/select_screen" method="_on_alert_open_screen"]
-[connection signal="open_screen" from="Alert2" to="Alert2/select_screen" method="_on_alert_open_screen"]
+[connection signal="mission_loading_complete_signal" from="mission_loader" to="mission_spawner" method="on_mission_loading_complete"]
+[connection signal="timeout" from="mission_spawner/Timer" to="mission_spawner" method="_on_timer_timeout"]

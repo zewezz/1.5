@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://h4jpubxd00o1"]
+
+[ext_resource type="Script" uid="uid://dlymj8a56f0ip" path="res://script/alert_select_screen.gd" id="1_1xltp"]
+[ext_resource type="Texture2D" uid="uid://b66yer8efn4ug" path="res://asset/UI/01_Flat_Theme/Sprites/UI_Flat_ButtonPlay01a.png" id="2_1xltp"]
+[ext_resource type="PackedScene" uid="uid://lg0y1m707bpa" path="res://scene/select_screen.tscn" id="3_1xltp"]
+
+[node name="Alert" type="Node2D" node_paths=PackedStringArray("select_screen")]
+script = ExtResource("1_1xltp")
+select_screen = NodePath("select_screen")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -123.99999
+offset_top = -121.99999
+offset_right = -98.99999
+offset_bottom = -97.99999
+scale = Vector2(10, 10)
+icon = ExtResource("2_1xltp")
+icon_alignment = 1
+
+[node name="select_screen" parent="." instance=ExtResource("3_1xltp")]
+visible = false
+
+[connection signal="open_screen" from="." to="select_screen" method="_on_alert_open_screen"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

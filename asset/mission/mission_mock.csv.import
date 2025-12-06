@@ -1,0 +1,15 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dnly34blygtxa"
+valid=false
+
+[deps]
+
+source_file="res://asset/mission/mission_mock.csv"
+
+[params]
+
+compress=true
+delimiter=0

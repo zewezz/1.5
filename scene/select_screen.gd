@@ -1,20 +1,18 @@
+class_name SelectScreen
+
 extends Node2D
 @onready var alert: Node2D = $".."
 
-@export var requirement_count:int = 3
+var mission_data: MissionData
+
+# Interface
+@export var title_headline: Label
+@export var description_headline: Label 
 @export var mission_points: Array[Node2D] 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	 # Replace with function body.
-	var count = 0
-	# loop for all mission point
-	# disable the point that index exceed the requirement number
-	for point in mission_points:
-		if count > requirement_count - 1:
-			mission_points[count].disable()
-			mission_points[count].visible = false
-		count = count + 1
+	setup_mission()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,3 +29,21 @@ func _on_alert_open_screen() -> void:
 		#self.visible = false
 		#print("close sreen")
 		
+func setup_mission():
+	# mission_data cannot be null, initialize anon one
+	if mission_data == null:
+		mission_data = MissionData.new()
+	var count = 0
+	# loop for all mission point
+	# disable the point that index exceed the requirement number
+	for point in mission_points:
+		if count > mission_data.requirement_count - 1:
+			mission_points[count].disable()
+			mission_points[count].visible = false
+		count = count + 1
+	
+	title_headline.text = mission_data.title
+	
+func set_new_mission(new_mission: MissionData):
+	mission_data = new_mission
+	setup_mission()
