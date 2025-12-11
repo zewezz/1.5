@@ -26,7 +26,10 @@ func is_empty():
 	return not card_inpoint
 	
 func is_ready_to_snap():
-	return is_empty() and is_enable
+	return is_empty() and select_screen.visible
 	
 func disable():
+	is_enable = false
+	
+func enable():
 	is_enable = false

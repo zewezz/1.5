@@ -1,8 +1,70 @@
-[gd_scene load_steps=4 format=3 uid="uid://h4jpubxd00o1"]
+[gd_scene load_steps=8 format=3 uid="uid://h4jpubxd00o1"]
 
 [ext_resource type="Script" uid="uid://dlymj8a56f0ip" path="res://script/alert_select_screen.gd" id="1_1xltp"]
 [ext_resource type="Texture2D" uid="uid://b66yer8efn4ug" path="res://asset/UI/01_Flat_Theme/Sprites/UI_Flat_ButtonPlay01a.png" id="2_1xltp"]
 [ext_resource type="PackedScene" uid="uid://lg0y1m707bpa" path="res://scene/select_screen.tscn" id="3_1xltp"]
+[ext_resource type="Texture2D" uid="uid://bnda8omo57kd4" path="res://asset/white2x2.jpg" id="3_d4oma"]
+
+[sub_resource type="Animation" id="Animation_ik8m0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:mouse_filter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureProgressBar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_657vb"]
+resource_name = "cooldown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureProgressBar:mouse_filter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureProgressBar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_22q33"]
+_data = {
+&"RESET": SubResource("Animation_ik8m0"),
+&"cooldown": SubResource("Animation_657vb")
+}
 
 [node name="Alert" type="Node2D" node_paths=PackedStringArray("select_screen")]
 script = ExtResource("1_1xltp")
@@ -17,8 +79,37 @@ scale = Vector2(10, 10)
 icon = ExtResource("2_1xltp")
 icon_alignment = 1
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Button"]
+self_modulate = Color(0.8014167, 0.66938543, 0, 0.88235295)
+clip_children = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.400001
+offset_top = -12.100001
+offset_right = 12.699997
+offset_bottom = 11.899998
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+rounded = true
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = ExtResource("3_d4oma")
+tint_progress = Color(0.96173567, 0.9654973, 0.9690226, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Button"]
+libraries = {
+&"": SubResource("AnimationLibrary_22q33")
+}
+
 [node name="select_screen" parent="." instance=ExtResource("3_1xltp")]
 visible = false
 
 [connection signal="open_screen" from="." to="select_screen" method="_on_alert_open_screen"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="card_return_hand" from="select_screen" to="." method="_on_select_screen_card_return_hand"]

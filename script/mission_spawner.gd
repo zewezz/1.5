@@ -28,11 +28,12 @@ func spawn_mission_on_position(position: Vector2):
 	if is_instance_of(spawned, AlertSelectScreen):
 		# Find select_sreen
 		var alert_select_screen: AlertSelectScreen = spawned
-		var select_screen = alert_select_screen.select_screen
+		var select_screen: SelectScreen = alert_select_screen.select_screen
 		# Get new random mission
 		var new_mission = mission_loader.pick_one_random_mission()
 		# Setup
 		select_screen.set_new_mission(new_mission)
+		select_screen.setup_position()
 
 func pick_random_spawn_position() -> Vector2:
 	var rand_x = randf_range(min_rect_spawn_vector2.x, max_rect_spawn_vector2.x)

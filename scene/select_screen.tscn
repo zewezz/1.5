@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://lg0y1m707bpa"]
 
 [ext_resource type="Texture2D" uid="uid://bt1c53m0tygga" path="res://asset/Ghost_moodboard.jpg" id="1_7m2k7"]
-[ext_resource type="Script" uid="uid://c5kldylofjj4m" path="res://scene/select_screen.gd" id="1_yt705"]
+[ext_resource type="Script" uid="uid://c5kldylofjj4m" path="res://script/select_screen.gd" id="1_yt705"]
 [ext_resource type="PackedScene" uid="uid://c51k1m707qj1b" path="res://scene/mission_point.tscn" id="3_tgbbe"]
 
 [node name="select_screen" type="Node2D" node_paths=PackedStringArray("title_headline", "description_headline", "mission_points")]
@@ -43,12 +43,22 @@ I am so stress. what the fuck is this
 
 [node name="missionPoint" parent="." instance=ExtResource("3_tgbbe")]
 z_index = 5
-position = Vector2(0, 137)
+position = Vector2(0, 2)
 
 [node name="missionPoint2" parent="." instance=ExtResource("3_tgbbe")]
 z_index = 5
-position = Vector2(168, 136)
+position = Vector2(168, 1)
 
 [node name="missionPoint3" parent="." instance=ExtResource("3_tgbbe")]
 z_index = 5
-position = Vector2(338, 135)
+position = Vector2(338, 0)
+
+[node name="Button" type="Button" parent="."]
+z_index = 4
+offset_left = 117.0
+offset_top = 151.0
+offset_right = 213.0
+offset_bottom = 182.0
+text = "Send Ghost"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

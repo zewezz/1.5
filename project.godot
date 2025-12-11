@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="onepointfive (Copy)"
-run/main_scene="uid://cow7pbn237uhk"
+run/main_scene="uid://cgyyo7bhwgpdr"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
