@@ -1,9 +1,14 @@
 extends Node2D
 
-const HAND_COUNT = 6
+const HAND_COUNT = 5
 const CARD_SCENE_PATH = "res://scene/card.tscn"
+const BLUEMAN_CARD_SCENE_PATH = "res://scene/ghotst/card_blueman.tscn"
+const BUFFALO_CARD_SCENE_PATH = "res://scene/ghotst/card_buffalo.tscn"
+const GRANDSPEED_CARD_SCENE_PATH = "res://scene/ghotst/card_grandspeed.tscn"
+const KASEE_CARD_SCENE_PATH = "res://scene/ghotst/card_kasee.tscn"
+const KUMAN_CARD_SCENE_PATH = "res://scene/ghotst/card_kuman.tscn"
 const  CARD_WIDTH = 200
-const HAND_Y_POS = 890
+const HAND_Y_POS = 1010
 
 var player_hand = []
 var center_screen_x
@@ -11,9 +16,17 @@ var center_screen_x
 func _ready() -> void:
 	center_screen_x = get_viewport().size.x/2
 	print(center_screen_x)
-	var card_scene= preload(CARD_SCENE_PATH)
+	var blueman_card_scene= preload(BLUEMAN_CARD_SCENE_PATH)
+	var buffalo_card_scene= preload(BUFFALO_CARD_SCENE_PATH)
+	var granspeed_card_scene= preload(GRANDSPEED_CARD_SCENE_PATH)
+	var kasee_card_scene= preload(KASEE_CARD_SCENE_PATH)
+	var kuman_card_scene= preload(KUMAN_CARD_SCENE_PATH)
+	var ghost = [blueman_card_scene,buffalo_card_scene,granspeed_card_scene,
+	kasee_card_scene, kuman_card_scene]
+	
 	for i in range(HAND_COUNT):
-		var new_card = card_scene.instantiate()
+		print(i)
+		var new_card = ghost[i].instantiate()
 		$"../cardManager".add_child(new_card)
 		new_card.name = "Card"
 		add_card_to_hand(new_card)
