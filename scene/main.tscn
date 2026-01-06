@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cow7pbn237uhk"]
+[gd_scene load_steps=13 format=3 uid="uid://cow7pbn237uhk"]
 
 [ext_resource type="Script" uid="uid://bnldlq3qacmg0" path="res://script/game_manager.gd" id="1_brvut"]
 [ext_resource type="Script" uid="uid://dl3hlph1bh3si" path="res://card_manager.gd" id="1_wp4xf"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://l8x0bnc4et0" path="res://asset/Dice/2.png" id="7_k65ib"]
 [ext_resource type="Texture2D" uid="uid://bhstydw0m7shj" path="res://asset/Dice/3.png" id="8_wscrc"]
 [ext_resource type="Texture2D" uid="uid://b5pxvr4umi0ox" path="res://asset/Dice/4.png" id="9_mswub"]
+[ext_resource type="Texture2D" uid="uid://bfjf6wrkd628n" path="res://asset/ghost_art/map.png" id="11_k65ib"]
 [ext_resource type="Script" uid="uid://dwro6dgvn3iwl" path="res://script/mission_loader.gd" id="12_wscrc"]
 [ext_resource type="Script" uid="uid://dtd2ggo3dorfq" path="res://script/mission_spawner.gd" id="13_mswub"]
 
@@ -70,6 +71,8 @@ unique_name_in_owner = true
 script = ExtResource("1_brvut")
 
 [node name="score_label" type="Label" parent="GameManager"]
+modulate = Color(0.61229926, 1.504086e-06, 5.7756904e-07, 1)
+z_index = 1
 offset_left = 1332.0
 offset_top = 58.0
 offset_right = 1887.0
@@ -88,9 +91,11 @@ root_node = NodePath("../..")
 script = ExtResource("1_wp4xf")
 
 [node name="missionPoint" parent="." instance=ExtResource("2_brvut")]
+visible = false
 position = Vector2(227, 174)
 
 [node name="missionPoint2" parent="." instance=ExtResource("2_brvut")]
+visible = false
 position = Vector2(884, 176)
 
 [node name="PlayerHand" type="Node2D" parent="."]
@@ -139,6 +144,11 @@ wait_time = 5.0
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(992.0001, 579.99994)
 scale = Vector2(-290.64783, 167.42886)
+
+[node name="Map" type="Sprite2D" parent="."]
+position = Vector2(962.5, 542.49994)
+scale = Vector2(1.1358244, 1.1315788)
+texture = ExtResource("11_k65ib")
 
 [connection signal="play_score" from="GameManager" to="missionPoint" method="play_com"]
 [connection signal="mission_loading_complete_signal" from="mission_loader" to="mission_spawner" method="on_mission_loading_complete"]

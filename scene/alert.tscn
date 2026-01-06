@@ -71,7 +71,7 @@ script = ExtResource("1_ses4w")
 [node name="Button" type="Button" parent="."]
 offset_left = -123.99999
 offset_top = -121.99999
-offset_right = -98.79999
+offset_right = -98.99999
 offset_bottom = -97.99999
 scale = Vector2(10, 10)
 icon = ExtResource("2_ses4w")
