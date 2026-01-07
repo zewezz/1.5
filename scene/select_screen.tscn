@@ -44,6 +44,7 @@ ten minutes. Could you sneak in and
 tell me answer. My mom gonna kill me 
 if I fail. please, I'll give you all my 
 money... my snack too.\""
+autowrap_mode = 3
 
 [node name="missionPoint" parent="." instance=ExtResource("3_tgbbe")]
 z_index = 5

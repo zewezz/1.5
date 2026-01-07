@@ -15,7 +15,7 @@ signal card_return_hand
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	setup_mission()
+	# setup_mission()
 	setup_return_hand_signal()
 
 
@@ -42,12 +42,18 @@ func _input(event):
 		#print("close sreen")
 		
 func setup_mission():
+	print("Setup Mission")
 	# mission_data cannot be null, initialize anon one
 	if mission_data == null:
 		mission_data = MissionData.new()
-	var count = 0
+
+	#print setuped mission  
+	print("Title: %s" % [mission_data.title])
+	print("Requirement Count: %s" % [mission_data.requirement_count])
+
 	# loop for all mission point
 	# disable the point that index exceed the requirement number
+	var count = 0
 	for point in mission_points:
 		if count > mission_data.requirement_count - 1:
 			mission_points[count].disable()
@@ -55,6 +61,7 @@ func setup_mission():
 		count = count + 1
 	
 	title_headline.text = mission_data.title
+	description_headline.text = mission_data.description
 	
 func set_new_mission(new_mission: MissionData):
 	mission_data = new_mission

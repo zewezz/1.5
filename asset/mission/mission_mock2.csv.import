@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cj0kxptnfayyo"
+
+[deps]
+
+files=["res://asset/mission/mission_mock2.Description.translation", "res://asset/mission/mission_mock2.Requirement.translation", "res://asset/mission/mission_mock2.S1.translation", "res://asset/mission/mission_mock2.S2.translation", "res://asset/mission/mission_mock2.S3.translation", "res://asset/mission/mission_mock2.S4.translation", "res://asset/mission/mission_mock2.S5.translation"]
+
+source_file="res://asset/mission/mission_mock2.csv"
+dest_files=["res://asset/mission/mission_mock2.Description.translation", "res://asset/mission/mission_mock2.Requirement.translation", "res://asset/mission/mission_mock2.S1.translation", "res://asset/mission/mission_mock2.S2.translation", "res://asset/mission/mission_mock2.S3.translation", "res://asset/mission/mission_mock2.S4.translation", "res://asset/mission/mission_mock2.S5.translation"]
+
+[params]
+
+compress=true
+delimiter=0
