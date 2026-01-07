@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://wsradskuarpq"]
+
+[node name="stat_screen" type="Node2D"]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+
+[node name="text" type="Node" parent="."]
+
+[node name="Headline5" type="Label" parent="text"]
+modulate = Color(0, 0, 0, 1)
+z_index = 7
+offset_left = 9.0
+offset_top = -33.0
+offset_right = 117.0
+text = "Scare"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Headline" type="Label" parent="text"]
+modulate = Color(0, 0, 0, 1)
+z_index = 7
+offset_left = -180.0
+offset_top = -33.0
+offset_right = -72.0
+text = "Smart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Headline2" type="Label" parent="text"]
+modulate = Color(0, 0, 0, 1)
+z_index = 7
+offset_left = -112.0
+offset_top = -33.0
+offset_right = -4.0
+text = "Strength"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Headline4" type="Label" parent="text"]
+modulate = Color(0, 0, 0, 1)
+z_index = 7
+offset_left = 63.0
+offset_top = -33.0
+offset_right = 171.0
+text = "Special"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Headline3" type="Label" parent="text"]
+modulate = Color(0, 0, 0, 1)
+z_index = 7
+offset_left = -45.0
+offset_top = -33.0
+offset_right = 63.0
+text = "Stealth"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -153.5
+offset_top = -240.0
+offset_right = 153.5
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="bar" type="Node" parent="."]
+
+[node name="Grey" type="ColorRect" parent="bar"]
+z_index = 6
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -973.0
+offset_top = -1307.0
+offset_right = -939.0
+offset_bottom = -1108.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.3779188, 0.37791887, 0.37791884, 1)
+
+[node name="Purple" type="ColorRect" parent="bar"]
+z_index = 6
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -915.0
+offset_top = -1308.0
+offset_right = -881.0
+offset_bottom = -1109.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.83297586, 0.0006058699, 0.8434144, 1)
+
+[node name="Green" type="ColorRect" parent="bar"]
+z_index = 6
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -859.0
+offset_top = -1309.0
+offset_right = -825.0
+offset_bottom = -1110.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0.76584995, 0.42189723, 1)
+
+[node name="Red" type="ColorRect" parent="bar"]
+z_index = 6
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1036.0
+offset_top = -1306.0
+offset_right = -1002.0
+offset_bottom = -1107.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(1, 0, 0, 1)
+
+[node name="Blue" type="ColorRect" parent="bar"]
+z_index = 6
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1102.0
+offset_top = -1306.0
+offset_right = -1068.0
+offset_bottom = -1107.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 1, 1)
